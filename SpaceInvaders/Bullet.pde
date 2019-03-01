@@ -12,7 +12,7 @@ class Bullet {
     fill(0, 0, 204);
     ellipse(x, y, r * 2, r * 2);
   }
-  void move(){
+  void move() {
     y -= 5;
   }
 }
