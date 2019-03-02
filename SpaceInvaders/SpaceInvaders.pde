@@ -25,19 +25,19 @@ void draw() {
   if (millis() > m  + temp)
   {
     Aliens.add(new Alien());
-    
+
     m = millis();
   }
   if (millis() > n + 10000)
+  {
+    if (temp > 800) {
+      temp -= 100;
+    } else
     {
-      if (temp > 800) {
-        temp -= 100;
-      } else
-      {
-        temp = 2000;
-      }
-      n = millis();
+      temp = 2000;
     }
+    n = millis();
+  }
 
   for (int x = 0; x < Bullets.size(); x++)           
   {
@@ -94,12 +94,8 @@ void keyPressed() {
   }
   if (keyCode == ENTER)
   {
-    for (int x = 0; x < Bullets.size(); x++) {
-      Bullets.remove(x);
-    }
-    for (int x = 0; x < Aliens.size(); x++) {
-      Aliens.remove(x);
-    }
+    Bullets.clear();
+    Aliens.clear();
     pontos = 0;
     loop();
   }
