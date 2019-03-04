@@ -13,7 +13,7 @@ class Snowflake {
   {
     fill(255);
     stroke(255);
-    ellipse (x, y, 5, 5);
+    ellipse (x, y, r, r);
   }
   
    void fall()
