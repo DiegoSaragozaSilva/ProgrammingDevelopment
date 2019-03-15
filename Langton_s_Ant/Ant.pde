@@ -14,11 +14,12 @@ class Ant {
     point(x, y);
   }
 
-  void moveWhite(int dir)
+  void move(int dir)
   {
     this.dir += dir;
-    
+
     if (this.dir == 4) this.dir = 0;
+    if (this.dir == -1) this.dir = 3;
 
     if (this.dir == 0) //UP
     {
@@ -30,28 +31,6 @@ class Ant {
     {
       this.y += 1;
     } else if (this.dir == 3) //LEFT
-    {
-      this.x -= 1;
-    }
-  }
-  
-  
-  void moveBlack(int dir)
-  {
-    this.dir += dir;
-    
-    if (this.dir == 4) this.dir = 0;
-
-    if (this.dir == 0) //UP
-    {
-      this.y -= 1;
-    } else if (this.dir == 3) //RIGHT
-    {
-      this.x += 1;
-    } else if (this.dir == 2) //DOWN
-    {
-      this.y += 1;
-    } else if (this.dir == 1) //LEFT
     {
       this.x -= 1;
     }
