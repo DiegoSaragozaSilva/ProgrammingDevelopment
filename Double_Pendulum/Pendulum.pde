@@ -1,8 +1,8 @@
 class Pendulum
 {
   float l1, l2, o1, o2, o1v, o2v, o1a, o2a, x1, y1, x2, y2, m1, m2, g;
+  float px2, py2;
   ArrayList<PVector> history = new ArrayList<PVector>();
-
 
   void create(float o1, float o2, float l1, float l2)
   {
@@ -18,17 +18,13 @@ class Pendulum
 
   void show()
   { 
-    PVector v = new PVector(x2, y2);
-    history.add(v);
-
     x1 = l1 * sin(o1);
     y1 = -l1 * cos(o1);
     x2 = x1 + l2 * sin(o2);
     y2 = y1 - l2 * cos(o2);     
-    
-
-    
-    translate(width / 2, 100);
+  
+    stroke(0);
+    translate(width / 2, height / 2);
     strokeWeight(3);
     line(0, 0, x1, -y1);
     strokeWeight(1);
@@ -39,11 +35,19 @@ class Pendulum
     strokeWeight(1);
     ellipse(x2, -y2, 25, 25);
 
-    for (int i = 0; i < history.size(); i++)
+    for (int i = 1; i < history.size(); i++)
     {
-      PVector current = history.get(i);
-      ellipse(current.x, -current.y, 2.5, 2.5);
+      if (frameCount > 1)
+      {
+        PVector p1 = history.get(i);
+        PVector p2 = history.get(i - 1);
+        strokeWeight(3);
+        stroke(0, 255, 229, 100);
+        line(p1.x, -p1.y, p2.x, -p2.y);
+      }
     }
+    PVector v = new PVector(x2, y2);
+    history.add(v);
   }
 
   void move()
@@ -63,7 +67,6 @@ class Pendulum
     float num4 = ((o2v * o2v) * l2 + (o1v * o1v) * l1 * cos(o1 - o2));
     float den = l1 * (2 * m1 + m2 - m2 * cos(2 * o1 - 2 * o2));
     o1a = (num1 + num2 + num3 + num4) / den;
-
 
     num1 =  2 * sin(o1 - o2);
     num2 = (o1v * o1v) * l1 * (m1 + m2);
