@@ -12,7 +12,7 @@ class Pendulum
     this.o1 = o1;
     this.o2 = o2;
     m1 = 40;
-    m2 = 50;
+    m2 = 40;
     g = 1;
   }
 
@@ -47,7 +47,17 @@ class Pendulum
       }
     }
     PVector v = new PVector(x2, y2);
-    history.add(v);
+    
+    if (history.size() >= 100)
+    {
+      history.add(v); 
+      history = realocate(history);
+    }
+    else
+    {
+      history.add(v);
+    }
+    
   }
 
   void move()
@@ -74,5 +84,15 @@ class Pendulum
     num4 = (o2v * o2v) * l2 * m2 * cos(o1 - o2);
     den = l2 * (2 * m1 + m2 - m2 * cos(2 * o1 - 2 * o2));
     o2a = (num1 * (num2 + num3 + num4)) / den;
+  }
+  
+  ArrayList realocate(ArrayList<PVector> al)
+  {
+    ArrayList<PVector> aux = new ArrayList<PVector>();
+    for(int i = 1; i < al.size(); i++)
+    {
+      aux.add(al.get(i));
+    }
+    return aux;
   }
 }
